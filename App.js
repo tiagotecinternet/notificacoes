@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, StatusBar, Button } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, StatusBar, Button, Platform } from 'react-native';
 
 import * as Notifications from "expo-notifications";
 import { useEffect } from 'react';
@@ -51,7 +51,7 @@ export default function App() {
       title: "Lembrete! 😀",
       body: "Não se esqueça de tomar água, senão você morre 💀!",
       data: { usuario: "Tiago 👽", cidade: "São Paulo" },
-      sound: "default", // necessário pro iOS
+      sound: Platform.OS === 'ios' ? "default" : "", // necessário pro iOS
     };
 
     /* Função de agendamento de notificações */
