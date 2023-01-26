@@ -3,9 +3,34 @@ import { SafeAreaView, StyleSheet, Text, View, StatusBar, Button } from 'react-n
 import * as Notifications from "expo-notifications";
 import { useEffect } from 'react';
 
+/* Manipulador de eventos de notificação */
+Notifications.setNotificationHandler({
+  handleNotification: async() => {
+    return {
+      shouldPlaySound: true,
+      shouldShowAlert: true,
+      shouldSetBadge: true,
+    }
+  }
+});
+
 export default function App() {
 
   useEffect( () => {
+
+    /* Necessário para iOS */
+    async function permissoesIos() {
+      return await Notifications.requestPermissionsAsync({
+        ios: {
+          allowAlert: true,
+          allowSound: true,
+          allowBadge: true,
+          allowAnnouncements: true
+        }
+      });
+    }
+
+    permissoesIos();
 
     /* Ouvinte de evento para as notificações recebidas, ou seja,
     quando a notificação aparece no topo da tela do dispositivo. */
@@ -24,7 +49,8 @@ export default function App() {
   const enviarMensagem = async() => {
     const mensagem = {
       title: "Lembrete!",
-      body: "Não se esqueça de tomar água!"
+      body: "Não se esqueça de tomar água!",
+      sound: "default" // necessário pro iOS
     };
 
     /* Função de agendamento de notificações */
