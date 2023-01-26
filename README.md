@@ -7,3 +7,7 @@ Sistema que permite o envio de notificações agendadas e externas mesmo com o a
 https://docs.expo.dev/versions/latest/sdk/notifications/
 
 https://docs.expo.dev/push-notifications/overview/
+
+## Instalação
+
+`npx expo install expo-notifications`
