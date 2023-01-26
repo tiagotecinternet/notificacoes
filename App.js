@@ -21,13 +21,25 @@ export default function App() {
   
   }, []);
 
+  const enviarMensagem = async() => {
+    const mensagem = {
+      title: "Lembrete!",
+      body: "Não se esqueça de tomar água!"
+    };
+
+    /* Função de agendamento de notificações */
+    await Notifications.scheduleNotificationAsync({
+      content: mensagem,
+      trigger: { seconds: 5 }
+    });
+  }
 
   return (
     <>
       <StatusBar />
       <SafeAreaView style={styles.container}>
         <Text>Exemplo de sistema de notificação local</Text>
-        <Button title='Disparar notificação' />
+        <Button title='Disparar notificação' onPress={enviarMensagem} />
       </SafeAreaView>
     </>
   );
