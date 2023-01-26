@@ -41,16 +41,17 @@ export default function App() {
     /* Ouvinte de evento para as respostas dadas às notificações, ou seja,
     quando o usuário interage (toca) na notificação. */
     Notifications.addNotificationResponseReceivedListener(resposta => {
-      console.log(resposta);
+      console.log(resposta.notification.request.content.data);
     });
   
   }, []);
 
   const enviarMensagem = async() => {
     const mensagem = {
-      title: "Lembrete!",
-      body: "Não se esqueça de tomar água!",
-      sound: "default" // necessário pro iOS
+      title: "Lembrete! 😀",
+      body: "Não se esqueça de tomar água, senão você morre 💀!",
+      data: { usuario: "Tiago 👽", cidade: "São Paulo" },
+      sound: "default", // necessário pro iOS
     };
 
     /* Função de agendamento de notificações */
