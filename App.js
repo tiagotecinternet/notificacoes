@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View, StatusBar, Button, Platform } from 'react-native';
 
 import * as Notifications from "expo-notifications";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 /* Manipulador de eventos de notificação */
 Notifications.setNotificationHandler({
@@ -15,6 +15,8 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
+
+  const [dados, setDados] = useState(null);
 
   useEffect( () => {
 
@@ -42,6 +44,7 @@ export default function App() {
     quando o usuário interage (toca) na notificação. */
     Notifications.addNotificationResponseReceivedListener(resposta => {
       console.log(resposta.notification.request.content.data);
+      setDados(resposta.notification.request.content.data);
     });
   
   }, []);
@@ -67,6 +70,14 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         <Text>Exemplo de sistema de notificação local</Text>
         <Button title='Disparar notificação' onPress={enviarMensagem} />
+
+        { dados && 
+          <View style={styles.conteudo}>
+            <Text> {dados.usuario} </Text>
+            <Text> {dados.cidade} </Text>
+          </View>
+        }
+
       </SafeAreaView>
     </>
   );
@@ -79,4 +90,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  conteudo: {
+    marginVertical: 8,
+    backgroundColor: "yellow",
+    padding: 8
+  }
 });
