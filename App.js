@@ -7,11 +7,17 @@ export default function App() {
 
   useEffect( () => {
 
-    /* Ouvinte de evento para as notificações recebidas */
-    Notifications.addNotificationReceivedListener();
+    /* Ouvinte de evento para as notificações recebidas, ou seja,
+    quando a notificação aparece no topo da tela do dispositivo. */
+    Notifications.addNotificationReceivedListener(notificacao => {
+      console.log(notificacao);
+    });
     
-    /* Ouvinte de evento para as respostas dadas às notificações */
-    Notifications.addNotificationResponseReceivedListener();
+    /* Ouvinte de evento para as respostas dadas às notificações, ou seja,
+    quando o usuário interage (toca) na notificação. */
+    Notifications.addNotificationResponseReceivedListener(resposta => {
+      console.log(resposta);
+    });
   
   }, []);
 
