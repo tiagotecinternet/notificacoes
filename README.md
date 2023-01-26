@@ -12,7 +12,7 @@ https://docs.expo.dev/push-notifications/overview/
 
 `npx expo install expo-notifications`
 
-## (Ferramenta de testes para envio de push notifications)
+## Ferramenta de testes para envio de push notifications
 
 https://expo.dev/notifications 
 
